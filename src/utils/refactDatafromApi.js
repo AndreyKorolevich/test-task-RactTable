@@ -1,9 +1,9 @@
 import {nanoid} from 'nanoid';
 
 const refactData = (data) => {
-   return  data.map(elem => {
-       elem.userId = nanoid(8);
-       return elem;
+    return data.map(elem => {
+        elem.userId = nanoid(8);
+        return elem;
     })
 }
 

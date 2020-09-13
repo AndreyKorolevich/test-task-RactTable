@@ -3,7 +3,7 @@ import {useGlobalFilter, usePagination, useSortBy, useTable} from 'react-table';
 import {Table} from 'reactstrap';
 import generateSortingIndicator from "../../utils/generateSortingIndicator";
 import {GlobalFilter} from "./Filtres";
-import Pagination from "./Pagination";
+import Pagination from "./Pagination/Pagination";
 import Additional from "./Additional";
 
 const TableContainer = ({columns, data, showAdditionalInf, choosenRow}) => {
@@ -54,8 +54,8 @@ const TableContainer = ({columns, data, showAdditionalInf, choosenRow}) => {
                 </tr>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
-                        {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps()}>
+                        {headerGroup.headers.map((column,i) => (
+                            <th key={i} {...column.getHeaderProps()}>
                                 <div {...column.getSortByToggleProps()}>
                                     {column.render('Header')}
                                     {generateSortingIndicator(column)}
@@ -69,19 +69,19 @@ const TableContainer = ({columns, data, showAdditionalInf, choosenRow}) => {
                 {page.map(row => {
                     prepareRow(row)
                     return (
-                        <tr id={row.original.userId} onClick={showAdditionalInf} {...row.getRowProps()}>
-                            {row.cells.map(cell => {
-                                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                        <tr id={row.original.userId} key={row.original.userId} onClick={showAdditionalInf} {...row.getRowProps()}>
+                            {row.cells.map((cell, i) => {
+                                return <td key={i} {...cell.getCellProps()}>{cell.render('Cell')}</td>
                             })}
                         </tr>
                     )
                 })}
                 </tbody>
                 <tfoot>
-                {footerGroups.map(group => (
-                    <tr {...group.getFooterGroupProps()}>
-                        {group.headers.map(column => (
-                            <td {...column.getFooterProps()}>{column.Footer && column.render('Footer')}</td>
+                {footerGroups.map((group, i) => (
+                    <tr key={i} {...group.getFooterGroupProps()}>
+                        {group.headers.map((column,i) => (
+                            <td key={i} {...column.getFooterProps()}>{column.Footer && column.render('Footer')}</td>
                         ))}
                     </tr>
                 ))}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-export const GlobalFilter = ({preGlobalFilteredRows, globalFilter, setGlobalFilter}) => {
+export const GlobalFilter = ({preGlobalFilteredRows, setGlobalFilter}) => {
     let [value, setValue] = useState('');
     const count = preGlobalFilteredRows && preGlobalFilteredRows.length;
 
@@ -18,7 +18,7 @@ export const GlobalFilter = ({preGlobalFilteredRows, globalFilter, setGlobalFilt
                            onChange={event => setValue(event.target.value)}
                            placeholder={`Search from ${count} records...`}
                            type="text" className="form-control mb-2" id="inlineFormInput"
-                           required={true}/>
+                           required/>
                 </div>
                 <div className="col-auto">
                     <button type="submit" className="btn btn-primary mb-2">Filter</button>

@@ -1,0 +1,9 @@
+.row {
+    maxWidth: 1000;
+    margin: 0 auto;
+    textAlign: 'center'
+}
+
+.col {
+    margin-top: 7px;
+}

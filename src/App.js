@@ -31,7 +31,7 @@ function App() {
         setChoosenRow(findRow);
     }
 
-    const showForm = (event) => {
+    const showForm = () => {
         setForm(!isForm);
     }
 
@@ -47,13 +47,14 @@ function App() {
             <div className="jumbotron">
                 <Header loadData={loadData} isFetching={isFetching}/>
             </div>
-            {isForm
-            ? <NewUser addNewUser={addNewUser}/>
-            :<div></div>}
+            {isForm && <NewUser addNewUser={addNewUser}/> }
             {data
-                ? <Container style={{marginTop: 100}}>
+                ? <Container>
                     <div className="col-auto">
-                        <button onClick={(event) => {showForm(event)}} type="submit"  className="btn btn-success mb-2">Add new user</button>
+                        <button onClick={() => {
+                            showForm()
+                        }} type="submit" className="btn btn-success mb-2">Add new user
+                        </button>
                     </div>
                     <TableContainer columns={columns} data={data} showAdditionalInf={showAdditionalInf}
                                     choosenRow={choosenRow}/>
@@ -63,7 +64,6 @@ function App() {
                 </div>}
         </div>
     )
-
 }
 
 export default App;

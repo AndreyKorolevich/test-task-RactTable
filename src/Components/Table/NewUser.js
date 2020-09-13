@@ -10,7 +10,7 @@ export const NewUser = ({addNewUser}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        addNewUser({id, firstName,lastName, email, phone});
+        addNewUser({id, firstName, lastName, email, phone});
         setId('');
         setFirstName('');
         setLastName('');

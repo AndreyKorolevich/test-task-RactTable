@@ -1,5 +1,6 @@
 import React from 'react';
-import {Row, Col, Button, Input, CustomInput } from 'reactstrap';
+import {Row, Col, CustomInput } from 'reactstrap';
+import styles from './Pagination.module.css'
 
 
 const Pagination = ({ setPageSize, gotoPage, previousPage, canPreviousPage, pageIndex,
@@ -8,44 +9,29 @@ const Pagination = ({ setPageSize, gotoPage, previousPage, canPreviousPage, page
         setPageSize(Number(event.target.value));
     };
 
-    const onChangeInInput = (event) => {
-        const page = event.target.value ? Number(event.target.value) - 1 : 0;
-        gotoPage(page);
-    };
-
     return (
-            <Row style={{ maxWidth: 1000, margin: '0 auto', textAlign: 'center' }}>
-                <Col md={3}>
-                    <Button
-                        color='primary'
+            <Row className={styles.row}>
+                <Col>
+                    <button
+                        className="btn btn-primary"
                         onClick={() => gotoPage(0)}
                         disabled={!canPreviousPage}
                     >
                         {'<<'}
-                    </Button>
-                    <Button
-                        color='primary'
+                    </button>
+                    <button
+                        className="btn btn-primary"
                         onClick={previousPage}
                         disabled={!canPreviousPage}
                     >
                         {'<'}
-                    </Button>
+                    </button>
                 </Col>
-                <Col md={2} style={{ marginTop: 7 }}>
+                <Col className={styles.col}>
                     Page{' '}
                     <strong>
                         {pageIndex + 1} of {pageOptions.length}
                     </strong>
-                </Col>
-                <Col md={2}>
-                    <Input
-                        type='number'
-                        min={1}
-                        style={{ width: 70 }}
-                        max={pageOptions.length}
-                        defaultValue={pageIndex + 1}
-                        onChange={onChangeInInput}
-                    />
                 </Col>
                 <Col md={2}>
                     <CustomInput
@@ -54,7 +40,6 @@ const Pagination = ({ setPageSize, gotoPage, previousPage, canPreviousPage, page
                         value={pageSize}
                         onChange={onChangeInSelect}
                     >
-                        >
                         {[10, 20, 30, 40, 50].map((pageSize) => (
                             <option key={pageSize} value={pageSize}>
                                 Show {pageSize}
@@ -62,17 +47,17 @@ const Pagination = ({ setPageSize, gotoPage, previousPage, canPreviousPage, page
                         ))}
                     </CustomInput>
                 </Col>
-                <Col md={3}>
-                    <Button color='primary' onClick={nextPage} disabled={!canNextPage}>
+                <Col>
+                    <button   className="btn btn-primary" onClick={nextPage} disabled={!canNextPage}>
                         {'>'}
-                    </Button>
-                    <Button
-                        color='primary'
+                    </button>
+                    <button
+                        className="btn btn-primary"
                         onClick={() => gotoPage(pageCount - 1)}
                         disabled={!canNextPage}
                     >
                         {'>>'}
-                    </Button>
+                    </button>
                 </Col>
             </Row>
     );
