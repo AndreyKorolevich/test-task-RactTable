@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {columns} from './Components/Table/ColumnsSource';
-import Header from "./Components/Header";
+import Header from "./Components/Header/Header";
+import {nanoid} from 'nanoid';
 import {getData} from "./api/api";
 import refactData from "./utils/refactDatafromApi";
 import {Container} from 'reactstrap';
@@ -18,7 +19,7 @@ function App() {
     const loadData = async (event) => {
         setFetching(true)
         const response = await getData(event.target.id);
-        setData(refactData(response));
+        setData(refactData(response, nanoid));
         setFetching(false);
     }
 
@@ -44,16 +45,13 @@ function App() {
 
     return (
         <div className="container-lg">
-            <div className="jumbotron">
-                <Header loadData={loadData} isFetching={isFetching}/>
-            </div>
-            {isForm && <NewUser addNewUser={addNewUser}/> }
+            <Header loadData={loadData} isFetching={isFetching}/>
+            {isForm && <NewUser addNewUser={addNewUser}/>}
             {data
                 ? <Container>
                     <div className="col-auto">
-                        <button onClick={() => {
-                            showForm()
-                        }} type="submit" className="btn btn-success mb-2">Add new user
+                        <button onClick={() => {showForm()}} type="submit" className="btn btn-success mb-2">
+                            Add new user
                         </button>
                     </div>
                     <TableContainer columns={columns} data={data} showAdditionalInf={showAdditionalInf}
